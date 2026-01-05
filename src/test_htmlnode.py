@@ -1,4 +1,4 @@
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 import unittest
 
 class TestHTMLNode(unittest.TestCase):
@@ -32,6 +32,22 @@ class TestHTMLNode(unittest.TestCase):
     def test_props_to_html2(self):
         node = HTMLNode("p", "This is a paragraph", props={"class": "my-class", "id": "my-id"})
         self.assertEqual(node.props_to_html(), " class=\"my-class\" id=\"my-id\"")
+
+    def test_leafnode(self):
+        node = LeafNode("div", "This is a div")
+        self.assertEqual(node.tag, "div")
+        self.assertEqual(node.value, "This is a div")
+        self.assertEqual(node.children, None)
+        self.assertEqual(node.props, None)
+
+    def test_leafnode2(self):
+        node = LeafNode("div", "This is a div", props={"class": "my-class"})
+        self.assertEqual(node.tag, "div")
+        self.assertEqual(node.value, "This is a div")
+        self.assertEqual(node.children, None)
+        self.assertEqual(node.props, {"class": "my-class"})
+
+
 
 if __name__ == "__main__":
     unittest.main()
